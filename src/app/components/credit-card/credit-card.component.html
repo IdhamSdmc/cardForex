@@ -1,0 +1,89 @@
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h2 class="titulo">Credit Cards for <p class="text-danger">(Crypto and Forex)</p></h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-body content-font">
+                    <h5 class="titulo ">{{ action | uppercase }} Credit Card</h5>
+                    <form [formGroup] = "form" (ngSubmit)="saveCreditCard()" >
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1">
+                                <i class="fa fa-user" 
+                                [class.green-icon]="this.form.get('owner')?.valid" 
+                                [class.red-icon]="this.form.get('owner')?.invalid && this.form.get('owner')?.touched">
+                                </i>
+                            </span>
+                            <input formControlName="owner" type="text" class="form-control" placeholder="Owner" aria-label="Username" aria-describedby="basic-addon1">
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1">
+                                <i class="fa fa-id-card" 
+                                [class.green-icon]="this.form.get('number')?.valid" 
+                                [class.red-icon]="this.form.get('number')?.invalid && this.form.get('number')?.touched"></i>
+                            </span>
+                            <input formControlName="number" maxlength="19" type="text" class="form-control" placeholder="Credit Number" aria-label="Username" aria-describedby="basic-addon1">
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1">
+                                <i class="fa fa-calendar-check" 
+                                [class.green-icon]="this.form.get('expire_date')?.valid" 
+                                [class.red-icon]="this.form.get('expire_date')?.invalid && this.form.get('expire_date')?.touched"></i>
+                            </span>
+                            <input type="text" maxlength="5" formControlName="expire_date" class="form-control" placeholder="MM/YY" aria-label="Username" aria-describedby="basic-addon1">
+                        </div>
+                        <div class= "form-check mb-3">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <label  class="form-check-label" for="flexCheckDefault">
+                              Give Permission
+                            </label>
+                        </div>
+                        <button type="submit" class="btn btn-success btn-lg w-100" [disabled]="this.form.invalid">
+                            <i class="fa fa-check-double"></i> {{buttonValue}}
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-body content-font">
+                    <h5 class="titulo">List of Credit Cards</h5>
+                    <table class="table">
+                        <thead class="table-dark">
+                          <tr>
+                            <th>Trader</th>
+                            <th>Credit Number</th>
+                            <th>Expire Date</th>
+                            <th colspan="2">Options</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let data of listCreditCards">
+                            <td>{{data.owner}}</td>
+                            <td>{{data.number}}</td>
+                            <td>{{data.expire_date}}</td>
+                            <td>
+                                <i (click)="modifiedCard(data)" class="fa fa-pen text-info"></i>
+                            </td>
+                            <td>
+                                
+                                <i (click)="removeCreditCard(data.id)" class="fa fa-xmark text-danger"></i>
+                                
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
